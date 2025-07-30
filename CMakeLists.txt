@@ -3,7 +3,8 @@ project(CMakeSFMLProject LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-option(BUILD_SHARED_LIBS "Build SFML libraries as shared" OFF)
+# 是否构建为共享库
+# option(BUILD_SHARED_LIBS "Build SFML libraries as shared" OFF)
 
 # set(SFML_STATIC_LIBRARIES TRUE)
 # find_package(SFML COMPONENTS Graphics Window System Audio Network REQUIRED)
@@ -23,10 +24,12 @@ target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics SFML::Window SFML::System SFML::Audio SFML::Network)
 
 # 针对MinGW，静态链接时需要将 libstdc++ 和 libgcc 编译进可执行文件中，避免运行时依赖外部 DLL
-# target_link_libraries(main PRIVATE
-#     -static-libgcc
-#     -static-libstdc++
-# )
+if(CMAKE_CXX_COMPILER_ID MATCHES "MinGW")
+    target_link_libraries(main PRIVATE
+        -static-libgcc
+        -static-libstdc++
+    )
+endif()
 
 enable_testing()
 add_test(NAME SmokeTest COMMAND main)
