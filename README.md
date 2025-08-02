@@ -1,6 +1,8 @@
 # CMake SFML Project
 This repository provides a CMake template for creating SFML-based C++ projects.
 
+[![Build Status](https://github.com/xLab-HDU/cmake-sfml-project/actions/workflows/ci.yml/badge.svg)](https://github.com/xLab-HDU/cmake-sfml-project/actions)
+
 ## How to Use
 
 ```sh
