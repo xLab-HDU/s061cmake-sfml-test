@@ -33,9 +33,11 @@ if(WIN32 AND (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR (CMAKE_CXX_COMPILER_ID STR
 endif()
 
 enable_testing()
-add_test(NAME SmokeTest COMMAND main)
+add_test(NAME SmokeTest
+         COMMAND main
+         WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
-install(TARGETS main RUNTIME DESTINATION bin)
+install(TARGETS main RUNTIME DESTINATION .)
 install(DIRECTORY "data/"
         DESTINATION "data"
         FILES_MATCHING PATTERN "*"
